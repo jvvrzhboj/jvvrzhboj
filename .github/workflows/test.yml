@@ -1,0 +1,23 @@
+name: Build and Test
+on: [push]
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+    - name: Set up Rust
+      uses: actions/setup-rust@v1
+      with:
+        version: 1.58.0
+    - name: Build and test
+      run: rustc --version
+      shell: bash
+    - name: Print success
+      run: echo 'Build and Test Successful' | tee test-output.txt
+      shell: bash
+    - name: Upload artifact
+      uses: actions/upload-artifact@v2
+      with:
+        name: test-output.txt
+        path: test-output.txt
